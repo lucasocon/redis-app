@@ -1,12 +1,14 @@
 class Message
-  def initialize(body, user, url)
+  include HTTParty
+
+  def initialize(user, body, url)
     @body = body
     @user = user
     @url = url
   end
 
-  def method_name
-    HTTParty.post 'http:localhost:3010/messages', body: {
+  def send
+    HTTParty.post 'http://localhost:3010/messages', body: {
       message: {
         body: @body,
         user: @user,
